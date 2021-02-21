@@ -2,30 +2,38 @@ from flask import Flask, request, json, jsonify
 import requests
 from flask_cors import CORS
 
+from dotenv import load_dotenv
+import os
+
 app = Flask(__name__)
 CORS(app)
 
-Y2B_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&type=video'
-Y2B_KEY = 'AIzaSyCvrvgwxxdGsNiTKExH1UEGvs5rKLb8r3Q'
+load_dotenv('.env')
 
-TRANS_URL = 'https://translation.googleapis.com/language/translate/v2'
-TRANS_KEY = 'AIzaSyDyPQSJqbpyOUpKffETJNUi7q6Fq6G8RsA'
+Y2B_URL = os.getenv('Y2B_URL')
+Y2B_KEY = os.getenv('Y2B_KEY')
 
-UNSPLASH_URL = 'https://api.unsplash.com/search/photos'
-UNSPLASH_KEY = '_KsPY_y0zTjR3q1mW2-BU29AXbX8FqZ171JBmkXJrRw'
+TRANS_URL = os.getenv('TRANS_URL')
+TRANS_KEY = os.getenv('TRANS_KEY')
+
+UNSPLASH_URL = os.getenv('UNSPLASH_URL')
+UNSPLASH_KEY = os.getenv('UNSPLASH_KEY')
 
 
 @app.route('/')
 def index():
-    return '<h1> Hello World </h1>'
+    # print(app.config)
+    return jsonify('Hello Widgets Server')
 
 
 @app.route('/youtube/<string:input>')
 def youtube(input):
     url = f"{Y2B_URL}&key={Y2B_KEY}&q={input}"
-    resp = requests.get(url)
-    print(resp.status_code)
-    return resp.json()
+    try:
+        resp = requests.get(url)
+        return resp.json()
+    except:
+        return jsonify('failure'), 400
 
 
 # https://stackoverflow.com/questions/10999990/get-raw-post-body-in-python-flask-regardless-of-content-type-header
