@@ -8,7 +8,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-load_dotenv('.env')
+# only for development
+# load_dotenv('.env')
 
 Y2B_URL = os.getenv('Y2B_URL')
 Y2B_KEY = os.getenv('Y2B_KEY')
