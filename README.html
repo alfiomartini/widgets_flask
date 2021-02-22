@@ -1,0 +1,21 @@
+<h1>A Flask Server for Widgets Collection</h1>
+
+<p>This is a small server written in Flask for the widgets application. This was needed in order to avoid exposing private keys used to access the resources of the severall apps inside the application. The server is comprised of three endpoints:</p>
+
+<ul>
+<li>GET /youtube/{<em>subject</em>}: return a JSON list of videos about subject</li>
+</ul>
+
+<p><code>curl https://widgets-flask.herokuapp.com/youtube/NicoleCross</code></p>
+
+<ul>
+<li>GET /unsplash/{<em>subject</em>}: return a JSON list of images related to subject</li>
+</ul>
+
+<p><code>curl https://widgets-flask.herokuapp.com/unsplash/libraries</code></p>
+
+<ul>
+<li>POST /translate : return JSON data with source text translated to target language</li>
+</ul>
+
+<p><code>curl -X POST -H "Content-Type: application/json" -d '{"input":"Hello World", "code":"pt"}' https://widgets-flask.herokuapp.com/translate</code></p>
