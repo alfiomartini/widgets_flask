@@ -10,6 +10,6 @@ This is a small server written in Flask for the widgets application. This was ne
 
 `curl https://widgets-flask.herokuapp.com/unsplash/libraries`
 
-- POST /translate : return JSON data with source text translated to target language
+- POST /translate : return JSON data with source text translated to target language. Requires input text and language code.
 
 `curl -X POST -H "Content-Type: application/json" -d '{"input":"Hello World", "code":"pt"}' https://widgets-flask.herokuapp.com/translate`
